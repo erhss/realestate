@@ -39,7 +39,7 @@ function _create_wall(xsize, ysize, zsize, xpos, ypos, zpos) {
 function _createMainWall() {
   // Main wall -->
   _create_wall(wallWidth, wallHeight, wallLength, -200, wallHeight / 2, 0);   
-  _create_wall(wallWidth, wallHeight, wallLength, 0, wallHeight / 2, 0);
+  _create_wall(wallWidth, wallHeight, 150, 0, wallHeight / 2, 25);
   _create_wall(wallLength, wallHeight, wallWidth, -100, wallHeight / 2, 100);
   _create_wall(wallLength, wallHeight, wallWidth, -100, wallHeight / 2, -100);
 
