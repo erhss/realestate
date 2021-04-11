@@ -26,12 +26,11 @@ function _create_wall(xsize, ysize, zsize, xpos, ypos, zpos) {
   let wallBuild = null;
 
   wallBuild = new THREE.Mesh(
-    new THREE.BoxGeometry(xsize, ysize, zsize),
-    new THREE.MeshPhongMaterial({
-      map: wallText
-    })) // length, width, height
+    new THREE.BoxGeometry(xsize, ysize, zsize)) // length, width, height
   wallBuild.position.set(xpos, ypos, zpos);
-  wallBuild.material.color.setHex(0xff00ff)
+  wallBuild.material.color.setHex(0x333333)
+  wallBuild.castShadow = true;
+  wallBuild.receiveShadow = true;
   scene.add(wallBuild);
 
 }
