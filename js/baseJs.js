@@ -46,14 +46,14 @@ var clock = new THREE.Clock();
 
 // LIGHTING ----------------------------------------------
   // Sunlight creation:
- var sunLight = new THREE.DirectionalLight( 0xffffff, 2 );
+ var sunLight = new THREE.DirectionalLight( 0xffffff, 1 );
   sunLight.color.setHSL( 0.1, 1, 0.95 );
   sunLight.position.set( 1.3, 0.75, 3 );
-  sunLight.position.multiplyScalar( 50 );
+  sunLight.position.multiplyScalar( 1 );
   
 // sun casts shadow 
   sunLight.castShadow = true;
-  sunLight.shadowMapWidth = sunLight.shadowMapHeight = 3500;  // shadow quality
+  sunLight.shadowMapWidth = sunLight.shadowMapHeight = 1000;  // shadow quality
 
   var shadowSize = 250;
 
@@ -71,11 +71,13 @@ var clock = new THREE.Clock();
   let objLoader = new OBJLoader();
    let mtlLoader = new MTLLoader();
 
-    mtlLoader.load('./raw/House.mtl', (mtl) => {
+    mtlLoader.load('./raw/House2.mtl', (mtl) => {
         mtl.preload();
         objLoader.setMaterials(mtl);
-        objLoader.load('./raw/House.obj', (object) => {
-        object.position.set(0,0,0);
+        objLoader.load('./raw/House2.obj', (object) => {
+        object.position.set(0,0.3,0);
+        object.castShadow = true;
+        object.receiveShadow = true;
         scene.add(object);
         });
     });
