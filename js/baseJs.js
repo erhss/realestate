@@ -285,9 +285,9 @@ scene.add(path);
 //   })
 // );
 
-path2.position.set(3.5,0,14.5);
-path2.castShadow = false;
-scene.add(path2);
+// path2.position.set(3.5,0,14.5);
+// path2.castShadow = false;
+// scene.add(path2);
 
 
 function rend(){
