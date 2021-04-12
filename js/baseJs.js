@@ -18,7 +18,7 @@ var clock = new THREE.Clock();
   );            // sets camera variables
 
   
-  camera.position.set(5, 1.5, 20);  // sets camera position inside the maze
+  camera.position.set(5, 1.75, 20);  // sets camera position inside the maze
 
   //camera.position.set(50, 400, -20);                     // TESTING CAM
 
@@ -45,6 +45,9 @@ var clock = new THREE.Clock();
   scene.background = texture;                           // sets the background for the scene as cubebox
 
 // LIGHTING ----------------------------------------------
+let amLight = new THREE.AmbientLight(0xffffff, 0.2);    // adds ambient light. very dim
+scene.add(amLight);
+
   // Sunlight creation:
  var sunLight = new THREE.DirectionalLight( 0xffffff, 1 );
   sunLight.color.setHSL( 0.1, 1, 0.95 );
@@ -53,7 +56,7 @@ var clock = new THREE.Clock();
   
 // sun casts shadow 
   sunLight.castShadow = true;
-  sunLight.shadowMapWidth = sunLight.shadowMapHeight = 1000;  // shadow quality
+  sunLight.shadowMapWidth = sunLight.shadowMapHeight = 1024;  // shadow quality
 
   var shadowSize = 250;
 
@@ -69,21 +72,20 @@ var clock = new THREE.Clock();
 
 // OBJECT IMPORT
   let objLoader = new OBJLoader();
-   let mtlLoader = new MTLLoader();
+  let mtlLoader = new MTLLoader();
 
-    mtlLoader.load('./raw/House2.mtl', (mtl) => {
+    mtlLoader.load('./raw/House.mtl', (mtl) => {
         mtl.preload();
         objLoader.setMaterials(mtl);
-        objLoader.load('./raw/House2.obj', (object) => {
-        object.position.set(0,0.3,0);
+        objLoader.load('./raw/House.obj', (object) => {
+        object.position.set(0,0.5,0);
         object.castShadow = true;
-        object.receiveShadow = true;
+        object.receiveShadow = false;
         scene.add(object);
         });
     });
 
-
-
+  
 
   let keyboard = [];                                                  // listens to keyboard input and stores in array
   addEventListener('keydown', (e)=>{
@@ -169,6 +171,71 @@ controls.addEventListener('unlock', function () {                   // if locked
   
   scene.add(plane);
 
+
+  let texture2 = new THREE.TextureLoader().load("./raw/woodenGround.png", function ( texture ){    // makes the ground texture 100x100 in the plane
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.offset.set( 0, 0 );
+    texture.repeat.set( 20,10 );
+  });
+
+  const houseFloor = new THREE.Mesh(             // creates a plane and mesh
+  new THREE.BoxGeometry(7, 7.9,1.05),
+  new THREE.MeshPhongMaterial({
+    map:texture2
+  }))                                        // creates a square cube plane for ground
+  houseFloor.material.color.setHex( 0xffffff );
+  houseFloor.rotation.x = -Math.PI/2;          // Make the plane horizontal instead of vertical
+  houseFloor.position.x = 3.5;
+  houseFloor.position.z = 3.8;
+  houseFloor.receiveShadow = true;
+  
+  scene.add(houseFloor);
+
+
+
+  
+  let texture3 = new THREE.TextureLoader().load("./raw/marbleKitchenGround.png", function ( texture ){    // makes the ground texture 100x100 in the plane
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.offset.set( 0, 0 );
+    texture.repeat.set( 2,2 );
+  });
+
+  const kitchenFloor = new THREE.Mesh(             // creates a plane and mesh
+  new THREE.BoxGeometry(4, 4.1,1.07),
+  new THREE.MeshPhongMaterial({
+    map:texture3
+  }))                                        // creates a square cube plane for ground
+  kitchenFloor.material.color.setHex( 0xffffff );
+  kitchenFloor.rotation.x = -Math.PI/2;          // Make the plane horizontal instead of vertical
+  kitchenFloor.position.x = 2;
+  kitchenFloor.position.z = 5.7;
+  kitchenFloor.receiveShadow = true;
+  
+  scene.add(kitchenFloor);
+
+
+  
+
+
+
+  let texture4 = new THREE.TextureLoader().load("./raw/marbleBathroom.png", function ( texture ){    // makes the ground texture 100x100 in the plane
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.offset.set( 0, 0 );
+    texture.repeat.set( 4,4 );
+  });
+
+  const bathroomFloor = new THREE.Mesh(             // creates a plane and mesh
+  new THREE.BoxGeometry(1.9, 3.5, 1.07),
+  new THREE.MeshPhongMaterial({
+    map:texture4
+  }))                                        // creates a square cube plane for ground
+  bathroomFloor.material.color.setHex( 0xffffff );
+  bathroomFloor.rotation.x = -Math.PI/2;          // Make the plane horizontal instead of vertical
+  bathroomFloor.position.x = 2.9;
+  bathroomFloor.position.z = 1.8;
+  bathroomFloor.receiveShadow = true;
+  
+  scene.add(bathroomFloor);
 
 
 
