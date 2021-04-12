@@ -171,13 +171,6 @@ controls.addEventListener('unlock', function () {                   // if locked
     }
 }
 
-  var testCube = new THREE.Mesh(
-    new THREE.BoxGeometry(10, 10, 10)) // length, width, height
-    testCube.position.set(20, 0, 0);
-    testCube.material.color.setHex(0x333333)
-    testCube.castShadow = true;
-    testCube.receiveShadow = true;
-  scene.add(testCube);
 
 
 
