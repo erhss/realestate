@@ -114,6 +114,117 @@ scene.add(amLight);
 
   
 
+  let sofaObjLoader = new OBJLoader();
+  let sofaMtlLoader = new MTLLoader();
+
+  sofaMtlLoader.load('./raw/Sofa.mtl', (sofaMtl) => {
+    sofaMtl.preload();
+    sofaObjLoader.setMaterials(sofaMtl);
+    sofaObjLoader.load('./raw/Sofa.obj', (sofaObject) => {
+    sofaObject.position.set(4.5,.9,6);
+    sofaObject.rotation.y = 1.57;
+    sofaObject.castShadow = true;
+    sofaObject.receiveShadow = true;
+    scene.add(sofaObject);
+    });
+});
+
+
+let tableOL = new OBJLoader();
+  let tableML = new MTLLoader();
+
+  tableML.load('./raw/Wood_Table/Wood_Table.mtl', (tableMtl) => {
+    tableMtl.preload();
+    tableOL.setMaterials(tableMtl);
+    tableOL.load('./raw/Wood_Table/Wood_Table.obj', (tableObject) => {
+    tableObject.position.set(6,.5,6.4);
+    //tableObject.rotation.y = 1.57;
+    tableObject.castShadow = true;
+    tableObject.receiveShadow = true;
+    scene.add(tableObject);
+    });
+});
+
+let bedOL = new OBJLoader();
+  let bedML = new MTLLoader();
+
+  bedML.load('./raw/Bed/cama.mtl', (bedMtl) => {
+    bedMtl.preload();
+    bedOL.setMaterials(bedMtl);
+    bedOL.load('./raw/Bed/cama.obj', (bedObject) => {
+    bedObject.position.set(5.4,.4,1.5);
+    //bedObject.rotation.y = 1.57;
+    bedObject.castShadow = true;
+    bedObject.receiveShadow = true;
+    scene.add(bedObject);
+    });
+});
+
+let paintOL = new OBJLoader();
+let paintML = new MTLLoader();
+
+paintML.load('./raw/painting/PM.mtl', (paintMtl) => {
+  paintMtl.preload();
+  paintOL.setMaterials(paintMtl);
+  paintOL.load('./raw/painting/PM.obj', (paintObject) => {
+  paintObject.position.set(4.5,2,4);
+  paintObject.rotation.y = -1.57;
+  paintObject.castShadow = true;
+  paintObject.receiveShadow = true;
+  scene.add(paintObject);
+  });
+});
+
+let toiletOL = new OBJLoader();
+let toiletML = new MTLLoader();
+
+toiletML.load('./raw/Toilet/Toilet.mtl', (toiletMtl) => {
+toiletMtl.preload();
+toiletOL.setMaterials(toiletMtl);
+toiletOL.load('./raw/Toilet/Toilet.obj', (toiletObject) => {
+toiletObject.position.set(3.5,.5,0);
+toiletObject.rotation.y = 1.57;
+toiletObject.scale.set(.25,.25,.25);
+toiletObject.castShadow = true;
+toiletObject.receiveShadow = true;
+scene.add(toiletObject);
+});
+});
+/*
+let bathOL = new OBJLoader();
+let bathML = new MTLLoader();
+
+bathML.load('./raw/Bath/PM.mtl', (bathMtl) => {
+bathMtl.preload();
+bathOL.setMaterials(bathMtl);
+bathOL.load('./raw/Bath/PM.obj', (bathObject) => {
+bathObject.position.set(4.5,2,4);
+//bathObject.rotation.y = -1.57;
+bathObject.castShadow = true;
+bathObject.receiveShadow = true;
+scene.add(bathObject);
+});
+});
+*/
+let sinkOL = new OBJLoader();
+let sinkML = new MTLLoader();
+
+sinkML.load('./raw/Sink/lavandino.mtl', (sinkMtl) => {
+sinkMtl.preload();
+sinkOL.setMaterials(sinkMtl);
+sinkOL.load('./raw/Sink/lavandino.obj', (sinkObject) => {
+sinkObject.position.set(2.8,1,3.2);
+sinkObject.rotation.y = 1.57;
+sinkObject.scale.set(.001,.001,.001);
+sinkObject.castShadow = true;
+sinkObject.receiveShadow = true;
+scene.add(sinkObject);
+});
+});
+
+
+
+
   let keyboard = [];                                                  // listens to keyboard input and stores in array
   addEventListener('keydown', (e)=>{
       keyboard[e.key] = true;
