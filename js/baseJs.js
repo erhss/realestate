@@ -238,7 +238,42 @@ controls.addEventListener('unlock', function () {                   // if locked
   
   scene.add(bathroomFloor);
 
+const material = new THREE.ShaderMaterial({
+	vertexShader: vShader,
+	fragmentShader: fShader,
+	uniforms
+});
+const uniforms = {
+	u_resolution: {value: {x:null, y:null}},
+	u_time: {value:0.0},
+	u_mouse:{value: {x:null,y:null}},
+}
 
+//vertex shader
+const vShader = varying vec2 v_uv;
+void main(){
+	v_uv = uv;
+	gl_Position = projectionMatrix * modelviewMatrix*vec4(position, 1.0);
+}
+// Fragment shader
+const fShader = 
+      varying vec2 v_uv;
+      uniform vec2 u_mouse;
+      uniform vec3 u_color;
+      uniform float u_time;
+void main(){
+	vec2 v = u_mouse/ u_resolution;
+	vec2 uv = gl_FragCoord.xy/ u_resolution;
+	gl_FragColor = vec4(1.0,0.0,sin(u_time*5.0) +0.5, 1.0).rgba;
+}
+
+//define geogmetry and material
+const geometry = new THREE.BoxGeogmetry(1,1,1);
+const material = new THREE.ShaderMaterial({
+	vertexShader: vShader,
+	fragmentShader: fShader,
+	uniforms
+});
 
 
 function rend(){
