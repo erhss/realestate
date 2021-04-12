@@ -20,12 +20,13 @@ var clock = new THREE.Clock();
   
   camera.position.set(5, 1.75, 20);  // sets camera position inside the maze
 
-  //camera.position.set(50, 400, -20);                     // TESTING CAM
+  //camera.position.set(50, 50, -20);                     // TESTING CAM
 
   renderer = new THREE.WebGLRenderer({ antialias: true });  // antiailas
   renderer.setSize(window.innerWidth, window.innerHeight);  // render size
   renderer.shadowMapEnabled = true;
   renderer.shadowMapCullFace = THREE.CullFaceBack;
+  
 
   document.body.appendChild(renderer.domElement);           // dom
 
@@ -52,11 +53,11 @@ scene.add(amLight);
  var sunLight = new THREE.DirectionalLight( 0xffffff, 1 );
   sunLight.color.setHSL( 0.1, 1, 0.95 );
   sunLight.position.set( 1.3, 0.75, 3 );
-  sunLight.position.multiplyScalar( 1 );
+  sunLight.position.multiplyScalar( 10 );
   
 // sun casts shadow 
   sunLight.castShadow = true;
-  sunLight.shadowMapWidth = sunLight.shadowMapHeight = 1024;  // shadow quality
+  sunLight.shadowMapWidth = sunLight.shadowMapHeight = 3000;  // shadow quality
 
   var shadowSize = 250;
 
@@ -80,7 +81,7 @@ scene.add(amLight);
         objLoader.load('./raw/House.obj', (object) => {
         object.position.set(0,0.5,0);
         object.castShadow = true;
-        object.receiveShadow = false;
+        object.receiveShadow = true;
         scene.add(object);
         });
     });
@@ -124,7 +125,7 @@ controls.addEventListener('unlock', function () {                   // if locked
 
 
   function processKeyboard(delta){                                    // processes the keys pressed
-    let speed = 5;
+    let speed = 25;
     let actualSpeed = speed * delta;                                 // Uses time-delta so that speed is not dependent on framerate.
     
     if (keyboard['w'] || keyboard['ArrowUp']){                      // if w is pressed, move forward etc...
@@ -145,8 +146,8 @@ controls.addEventListener('unlock', function () {                   // if locked
 }
 
   var testCube = new THREE.Mesh(
-    new THREE.BoxGeometry(20, 20, 20)) // length, width, height
-    testCube.position.set(200, 5, 0);
+    new THREE.BoxGeometry(10, 10, 10)) // length, width, height
+    testCube.position.set(20, 0, 0);
     testCube.material.color.setHex(0x333333)
     testCube.castShadow = true;
     testCube.receiveShadow = true;
