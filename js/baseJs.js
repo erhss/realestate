@@ -6,6 +6,18 @@ import { PointerLockControls } from '../plugins/PointerLockControls.js'
 import { MTLLoader } from '../plugins/MTLLoader.js'
 import { OBJLoader } from '../plugins/OBJLoader.js'
 
+
+// GREY PATH SHADERS
+const _VShader = `
+void main(){
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}`;
+
+const _FShader = `
+void main(){
+  gl_FragColor = vec(1, 1, 1, 1);
+}`;
+
 var scene, camera, renderer; // local variables scene, camera, renderer
 var clock = new THREE.Clock();
 
@@ -85,6 +97,20 @@ scene.add(amLight);
         scene.add(object);
         });
     });
+
+    let objLoader33 = new OBJLoader();
+    let mtlLoader33 = new MTLLoader();
+
+    mtlLoader33.load('./raw/fence.mtl', (mtl) => {
+      mtl.preload();
+      objLoader33.setMaterials(mtl);
+      objLoader33.load('./raw/fence.obj', (object) => {
+      object.position.set(0,0.5,0);
+      object.castShadow = true;
+      object.receiveShadow = true;
+      scene.add(object);
+      });
+  });
 
   
 
@@ -238,42 +264,30 @@ controls.addEventListener('unlock', function () {                   // if locked
   
   scene.add(bathroomFloor);
 
-const material = new THREE.ShaderMaterial({
-	vertexShader: vShader,
-	fragmentShader: fShader,
-	uniforms
-});
-const uniforms = {
-	u_resolution: {value: {x:null, y:null}},
-	u_time: {value:0.0},
-	u_mouse:{value: {x:null,y:null}},
-}
+const path = new THREE.Mesh(
+  new THREE.BoxGeometry(1,1.1,10),
+  new THREE.MeshStandardMaterial({color: 0xFFFFFF})
+);
+path.position.set(3.5,0,14.5);
+path.castShadow = false;
+scene.add(path);
 
-//vertex shader
-const vShader = varying vec2 v_uv;
-void main(){
-	v_uv = uv;
-	gl_Position = projectionMatrix * modelviewMatrix*vec4(position, 1.0);
-}
-// Fragment shader
-const fShader = 
-      varying vec2 v_uv;
-      uniform vec2 u_mouse;
-      uniform vec3 u_color;
-      uniform float u_time;
-void main(){
-	vec2 v = u_mouse/ u_resolution;
-	vec2 uv = gl_FragCoord.xy/ u_resolution;
-	gl_FragColor = vec4(1.0,0.0,sin(u_time*5.0) +0.5, 1.0).rgba;
-}
 
-//define geogmetry and material
-const geometry = new THREE.BoxGeogmetry(1,1,1);
-const material = new THREE.ShaderMaterial({
-	vertexShader: vShader,
-	fragmentShader: fShader,
-	uniforms
-});
+
+
+// SUPPOSE TO BE FILLED WITH VERTEX SHADERS.
+const path2 = new THREE.Mesh(
+  new THREE.BoxGeometry(1,1.1,10),
+  new THREE.ShaderMaterial({
+    uniforms:{},
+    vertexShader: _VShader,
+    fragmentShader: _FShader,
+  })
+);
+
+path2.position.set(3.5,0,14.5);
+path2.castShadow = false;
+scene.add(path2);
 
 
 function rend(){
