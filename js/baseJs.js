@@ -8,15 +8,15 @@ import { OBJLoader } from '../plugins/OBJLoader.js'
 
 
 // GREY PATH SHADERS
-const _VShader = `
-void main(){
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-}`;
+// const _VShader = `
+// void main(){
+//   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+// }`;
 
-const _FShader = `
-void main(){
-  gl_FragColor = vec(1, 1, 1, 1);
-}`;
+// const _FShader = `
+// void main(){
+//   gl_FragColor = vec(1, 1, 1, 1);
+// }`;
 
 var scene, camera, renderer; // local variables scene, camera, renderer
 var clock = new THREE.Clock();
@@ -276,14 +276,14 @@ scene.add(path);
 
 
 // SUPPOSE TO BE FILLED WITH VERTEX SHADERS.
-const path2 = new THREE.Mesh(
-  new THREE.BoxGeometry(1,1.1,10),
-  new THREE.ShaderMaterial({
-    uniforms:{},
-    vertexShader: _VShader,
-    fragmentShader: _FShader,
-  })
-);
+// const path2 = new THREE.Mesh(
+//   new THREE.BoxGeometry(1,1.1,10),
+//   new THREE.ShaderMaterial({
+//     uniforms:{},
+//     vertexShader: _VShader,
+//     fragmentShader: _FShader,
+//   })
+// );
 
 path2.position.set(3.5,0,14.5);
 path2.castShadow = false;
