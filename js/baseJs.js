@@ -190,22 +190,8 @@ toiletObject.receiveShadow = true;
 scene.add(toiletObject);
 });
 });
-/*
-let bathOL = new OBJLoader();
-let bathML = new MTLLoader();
 
-bathML.load('./raw/Bath/PM.mtl', (bathMtl) => {
-bathMtl.preload();
-bathOL.setMaterials(bathMtl);
-bathOL.load('./raw/Bath/PM.obj', (bathObject) => {
-bathObject.position.set(4.5,2,4);
-//bathObject.rotation.y = -1.57;
-bathObject.castShadow = true;
-bathObject.receiveShadow = true;
-scene.add(bathObject);
-});
-});
-*/
+
 let sinkOL = new OBJLoader();
 let sinkML = new MTLLoader();
 
@@ -262,7 +248,7 @@ controls.addEventListener('unlock', function () {                   // if locked
 
 
   function processKeyboard(delta){                                    // processes the keys pressed
-    let speed = 25;
+    let speed = 5;
     let actualSpeed = speed * delta;                                 // Uses time-delta so that speed is not dependent on framerate.
     
     if (keyboard['w'] || keyboard['ArrowUp']){                      // if w is pressed, move forward etc...
