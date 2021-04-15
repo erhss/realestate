@@ -138,7 +138,6 @@ let tableOL = new OBJLoader();
     tableOL.setMaterials(tableMtl);
     tableOL.load('./raw/Wood_Table/Wood_Table.obj', (tableObject) => {
     tableObject.position.set(6,.5,6.4);
-    //tableObject.rotation.y = 1.57;
     tableObject.castShadow = true;
     tableObject.receiveShadow = true;
     scene.add(tableObject);
