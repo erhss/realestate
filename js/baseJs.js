@@ -153,7 +153,6 @@ let bedOL = new OBJLoader();
     bedOL.setMaterials(bedMtl);
     bedOL.load('./raw/Bed/cama.obj', (bedObject) => {
     bedObject.position.set(5.4,.4,1.5);
-    //bedObject.rotation.y = 1.57;
     bedObject.castShadow = true;
     bedObject.receiveShadow = true;
     scene.add(bedObject);
@@ -238,7 +237,7 @@ const controls = new PointerLockControls(camera, document.body);  // imports poi
 
 controls.addEventListener('lock', function (){                      // if lock is false, takes control of the mouse and starts music.
     menuPanel.style.display = 'none';
-    //music.play();
+    music.play();
     
 });
 controls.addEventListener('unlock', function () {                   // if locked, mouse is released and music is stopped
