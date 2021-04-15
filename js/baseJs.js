@@ -242,7 +242,7 @@ controls.addEventListener('lock', function (){                      // if lock i
 });
 controls.addEventListener('unlock', function () {                   // if locked, mouse is released and music is stopped
      menuPanel.style.display = 'block';
-    //music.pause(); 
+    music.pause(); 
     });
 
 
